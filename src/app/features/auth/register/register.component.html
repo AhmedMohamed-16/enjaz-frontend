@@ -1,0 +1,85 @@
+<div class="page-shell">
+  <section class="auth-card" aria-labelledby="register-heading">
+    <div class="brand">
+      <h1 id="register-heading">Enjaz</h1>
+      <p>Build your workspace and stay on top of every task.</p>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-field">
+        <label for="name">Full Name</label>
+        <input id="name" type="text" formControlName="name" [attr.aria-describedby]="'name-error'"
+          aria-label="Full Name" />
+        <p class="input-error" *ngIf="isInvalid('name')" id="name-error">
+          <span *ngIf="nameControl?.hasError('required')">Full name is required.</span>
+          <span *ngIf="nameControl?.hasError('minlength')">Enter at least 2 characters.</span>
+        </p>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" [attr.aria-describedby]="'email-error'"
+          aria-label="Email" />
+        <p class="input-error" *ngIf="isInvalid('email')" id="email-error">
+          <span *ngIf="emailControl?.hasError('required')">Email is required.</span>
+          <span *ngIf="emailControl?.hasError('email')">Enter a valid email address.</span>
+        </p>
+      </div>
+
+      <div class="form-field password-field">
+        <label for="password">Password</label>
+        <div class="password-input-wrap">
+          <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+            [attr.aria-describedby]="'password-error password-strength'" aria-label="Password" />
+          <button type="button" class="visibility-toggle" (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <p class="input-error" *ngIf="isInvalid('password')" id="password-error">
+          <span *ngIf="passwordControl?.hasError('required')">Password is required.</span>
+          <span *ngIf="passwordControl?.hasError('minlength')">Password must be at least 8 characters.</span>
+          <span *ngIf="passwordControl?.hasError('pattern')">Use uppercase, lowercase, and a number.</span>
+        </p>
+        <div class="strength-meter" id="password-strength" *ngIf="passwordControl?.value">
+          <span class="strength-label">Strength:</span>
+          <strong [ngClass]="strengthClass">{{ passwordStrengthLabel }}</strong>
+          <div class="strength-bar">
+            <span [ngClass]="strengthClass"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-field password-field">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-input-wrap">
+          <input id="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'"
+            formControlName="confirmPassword" [attr.aria-describedby]="'confirm-password-error'"
+            aria-label="Confirm Password" />
+          <button type="button" class="visibility-toggle" (click)="toggleConfirmPasswordVisibility()"
+            [attr.aria-label]="showConfirmPassword ? 'Hide password' : 'Show password'">
+            {{ showConfirmPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <p class="input-error" *ngIf="isInvalid('confirmPassword')" id="confirm-password-error">
+          <span *ngIf="confirmPasswordControl?.hasError('required')">Confirm password is required.</span>
+          <span *ngIf="confirmPasswordControl?.hasError('passwordMismatch')">Passwords must match.</span>
+        </p>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="primary-btn" [disabled]="loading || registerForm.invalid">
+          <span *ngIf="!loading">Create Account</span>
+          <span *ngIf="loading" class="button-spinner">Creating account…</span>
+        </button>
+      </div>
+
+      <p class="server-error" *ngIf="serverError">{{ serverError }}</p>
+    </form>
+
+    <p class="secondary-link">
+      Already have an account?
+      <a routerLink="/auth/login">Sign In</a>
+    </p>
+  </section>
+</div>

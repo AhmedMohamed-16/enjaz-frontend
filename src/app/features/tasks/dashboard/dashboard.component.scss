@@ -1,0 +1,153 @@
+@use '../../../../styles/tokens' as tokens;
+
+.dashboard-shell {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.brand-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: tokens.$color-primary;
+}
+
+.app-description {
+  color: tokens.$color-text-muted;
+}
+
+.actions-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  font-weight: 600;
+  color: tokens.$color-text;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.stat-label {
+  display: block;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.filters-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.search-field,
+.select-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-field input,
+.select-field select {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 1rem;
+  background: #fff;
+  color: var(--color-text);
+}
+
+.new-task-btn {
+  min-width: 160px;
+}
+
+.task-results {
+  min-height: 280px;
+}
+
+.task-list-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.pagination-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.page-info {
+  color: var(--color-text-muted);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.modal-panel {
+  width: min(640px, 100%);
+  background: var(--color-card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+@media (max-width: 860px) {
+  .filters-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .dashboard-shell {
+    padding: 16px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions-row {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

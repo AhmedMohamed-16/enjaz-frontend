@@ -1,0 +1,96 @@
+<div class="dashboard-shell">
+  <header class="dashboard-header">
+    <div class="brand-block">
+      <div class="app-logo">Enjaz</div>
+      <div class="app-description">Your task workspace</div>
+    </div>
+
+    <div class="actions-row">
+      <span class="user-name">{{ authService.user()?.name || 'Team Member' }}</span>
+      <button type="button" class="secondary-btn" (click)="logout()" aria-label="Logout">
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <section class="stats-grid">
+    <article class="stat-card">
+      <span class="stat-label">Todo</span>
+      <strong>{{ stats().todo }}</strong>
+    </article>
+    <article class="stat-card">
+      <span class="stat-label">In Progress</span>
+      <strong>{{ stats().in_progress }}</strong>
+    </article>
+    <article class="stat-card">
+      <span class="stat-label">Done</span>
+      <strong>{{ stats().done }}</strong>
+    </article>
+  </section>
+
+  <section class="filters-row">
+    <div class="search-field">
+      <label for="task-search">Search tasks</label>
+      <input id="task-search" type="search" placeholder="Search by title or description"
+        (input)="onSearch($any($event.target).value)" aria-label="Search tasks" />
+    </div>
+
+    <div class="select-field">
+      <label for="status-filter">Status</label>
+      <select id="status-filter" (change)="setStatusFilter($any($event.target).value)" aria-label="Filter by status">
+        <option value="">All statuses</option>
+        <option value="todo">Todo</option>
+        <option value="in_progress">In Progress</option>
+        <option value="done">Done</option>
+      </select>
+    </div>
+
+    <div class="select-field">
+      <label for="priority-filter">Priority</label>
+      <select id="priority-filter" (change)="setPriorityFilter($any($event.target).value)"
+        aria-label="Filter by priority">
+        <option value="">All priorities</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+
+    <button type="button" class="primary-btn new-task-btn" (click)="openNewTask()" aria-label="Create new task">
+      New Task
+    </button>
+  </section>
+
+  <section class="task-results">
+    <app-spinner *ngIf="loading()"></app-spinner>
+
+    <app-empty-state *ngIf="!loading() && tasks().length === 0"
+      message="No tasks yet. Create a new task to get started."></app-empty-state>
+
+    <div class="task-list-grid" *ngIf="!loading() && tasks().length > 0">
+      <app-task-card *ngFor="let task of tasks()" [task]="task" (onEdit)="editTask($event)"
+        (onDelete)="deleteTask($event)" (onStatusChange)="changeTaskStatus($event)"></app-task-card>
+    </div>
+  </section>
+
+  <section class="pagination-row">
+    <button type="button" class="secondary-btn" (click)="prevPage()" [disabled]="pagination().page === 1"
+      aria-label="Previous page">
+      Previous
+    </button>
+    <span class="page-info">
+      Page {{ pagination().page }} of {{ pagination().totalPages }}
+    </span>
+    <button type="button" class="secondary-btn" (click)="nextPage()"
+      [disabled]="pagination().page === pagination().totalPages" aria-label="Next page">
+      Next
+    </button>
+  </section>
+
+  <div class="modal-backdrop" *ngIf="showTaskForm()" role="dialog" aria-modal="true" (keydown)="trapDialogFocus($event)"
+    tabindex="-1">
+    <div class="modal-panel">
+      <app-task-form [task]="editingTask()" (saved)="handleSaved()" (cancelled)="handleCancelled()"></app-task-form>
+    </div>
+  </div>
+</div>

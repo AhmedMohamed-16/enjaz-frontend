@@ -1,0 +1,54 @@
+<div class="page-shell">
+  <section class="auth-card" aria-labelledby="login-heading">
+    <div class="brand">
+      <h1 id="login-heading">Enjaz</h1>
+      <p>Manage tasks clearly, stay focused, and move faster.</p>
+    </div>
+
+    <div class="status-messages">
+      <div class="success-box" *ngIf="showRegistered">Your account was created successfully. Please sign in.</div>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" [attr.aria-describedby]="'email-error'"
+          aria-label="Email" />
+        <p class="input-error" *ngIf="isInvalid('email')" id="email-error">
+          <span *ngIf="emailControl?.hasError('required')">Email is required.</span>
+          <span *ngIf="emailControl?.hasError('email')">Enter a valid email address.</span>
+        </p>
+      </div>
+
+      <div class="form-field password-field">
+        <label for="password">Password</label>
+        <div class="password-input-wrap">
+          <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+            [attr.aria-describedby]="'password-error'" aria-label="Password" />
+          <button type="button" class="visibility-toggle" (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <p class="input-error" *ngIf="isInvalid('password')" id="password-error">
+          <span *ngIf="passwordControl?.hasError('required')">Password is required.</span>
+          <span *ngIf="passwordControl?.hasError('minlength')">Password must be at least 8 characters.</span>
+        </p>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="primary-btn" [disabled]="loading || loginForm.invalid">
+          <span *ngIf="!loading">Sign In</span>
+          <span *ngIf="loading" class="button-spinner">Signing in…</span>
+        </button>
+      </div>
+
+      <p class="server-error" *ngIf="serverError">{{ serverError }}</p>
+    </form>
+
+    <p class="secondary-link">
+      Don't have an account?
+      <a routerLink="/auth/register">Register</a>
+    </p>
+  </section>
+</div>

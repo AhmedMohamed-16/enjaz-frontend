@@ -1,0 +1,56 @@
+$color-primary: #4f46e5;
+$color-primary-hover: #4338ca;
+$color-danger: #ef4444;
+$color-success: #22c55e;
+
+// Light mode
+$color-text: #111827;
+$color-text-muted: #6b7280;
+$color-text-inverted: #ffffff;
+$color-border: #e5e7eb;
+$color-border-muted: #f3f4f6;
+$color-bg: #f9fafb;
+$color-card-bg: #ffffff;
+
+// Dark mode
+$color-text-dark: #f9fafb;
+$color-text-muted-dark: #d1d5db;
+$color-border-dark: #374151;
+$color-bg-dark: #111827;
+$color-card-bg-dark: #1f2937;
+
+// Radii
+$radius-sm: 4px;
+$radius: 8px;
+$radius-lg: 12px;
+
+// Shadows (progressive elevation)
+$shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+$shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+$shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+$shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+// Spacing scale (4px base)
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 12px;
+$space-base: 16px;
+$space-lg: 20px;
+$space-xl: 24px;
+$space-2xl: 32px;
+$space-3xl: 48px;
+
+// Typography
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+
+$font-size-xs: 0.75rem;  // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem;   // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem;  // 20px
+$font-size-2xl: 1.5rem;  // 24px
+$font-size-3xl: 1.875rem;// 30px
+$font-size-4xl: 2.25rem; // 36px
+
+// Breakpoints (container-first)

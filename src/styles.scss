@@ -1,0 +1,236 @@
+@use 'styles/tokens' as tokens;
+
+/* Global styles + CSS variables */
+:root {
+  --color-primary: #{tokens.$color-primary};
+  --color-primary-hover: #{tokens.$color-primary-hover};
+  --color-danger: #{tokens.$color-danger};
+  --color-success: #{tokens.$color-success};
+  --color-text: #{tokens.$color-text};
+  --color-text-muted: #{tokens.$color-text-muted};
+  --color-border: #{tokens.$color-border};
+  --color-bg: #{tokens.$color-bg};
+  --color-card-bg: #{tokens.$color-card-bg};
+  --radius: #{tokens.$radius};
+  --shadow: #{tokens.$shadow};
+  --font-family: #{tokens.$font-family};
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--color-bg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.brand h1 {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: 2rem;
+}
+
+.brand p {
+  margin: 8px 0 0;
+  color: var(--color-text-muted);
+}
+
+.status-messages {
+  margin-bottom: 16px;
+}
+
+.success-box {
+  border: 1px solid var(--color-success);
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--color-success);
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+
+.form-field {
+  margin-bottom: 16px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: #fff;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+.password-field .password-input-wrap {
+  position: relative;
+}
+
+.visibility-toggle {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0;
+}
+
+.input-error {
+  margin-top: 8px;
+  color: var(--color-danger);
+  font-size: 0.9rem;
+}
+
+.form-actions {
+  margin-top: 8px;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.primary-btn:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.primary-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.button-spinner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.button-spinner::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spinner 0.75s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.server-error {
+  margin-top: 14px;
+  color: var(--color-danger);
+  font-size: 0.95rem;
+}
+
+.secondary-link {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.secondary-link a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.secondary-link a:hover {
+  text-decoration: underline;
+}
+
+.strength-meter {
+  margin-top: 12px;
+}
+
+.strength-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.strength-bar {
+  height: 8px;
+  background: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.strength-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.strength-weak {
+  color: var(--color-danger);
+}
+
+.strength-weak + .strength-bar span {
+  width: 30%;
+  background: var(--color-danger);
+}
+
+.strength-medium {
+  color: #f59e0b;
+}
+
+.strength-medium + .strength-bar span {
+  width: 65%;
+  background: #f59e0b;
+}
+
+.strength-strong {
+  color: var(--color-success);
+}
+
+.strength-strong + .strength-bar span {
+  width: 100%;
+  background: var(--color-success);
+}

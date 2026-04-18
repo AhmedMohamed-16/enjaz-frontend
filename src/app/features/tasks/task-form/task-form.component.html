@@ -1,0 +1,50 @@
+<div class="task-form-shell">
+  <div class="form-heading">
+    <h2>{{ isEditMode ? 'Edit Task' : 'New Task' }}</h2>
+  </div>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-field">
+      <label for="title">Title</label>
+      <input id="title" type="text" formControlName="title" aria-label="Task title" aria-describedby="title-error" />
+      <p class="input-error" *ngIf="titleControl?.touched && titleControl?.hasError('required')" id="title-error">
+        Title is required.</p>
+    </div>
+
+    <div class="form-field">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" aria-label="Task description"></textarea>
+    </div>
+
+    <div class="grid-two">
+      <div class="form-field">
+        <label for="status">Status</label>
+        <select id="status" formControlName="status" aria-label="Task status">
+          <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.label }}</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="priority">Priority</label>
+        <select id="priority" formControlName="priority" aria-label="Task priority">
+          <option *ngFor="let option of priorityOptions" [value]="option.value">{{ option.label }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label for="dueDate">Due date</label>
+      <input id="dueDate" type="date" formControlName="dueDate" [attr.min]="minDueDate" aria-label="Task due date" />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="primary-btn" [disabled]="loading || taskForm.invalid" aria-label="Save task">
+        <span *ngIf="!loading">{{ isEditMode ? 'Save Changes' : 'Create Task' }}</span>
+        <span *ngIf="loading" class="button-spinner">Saving…</span>
+      </button>
+      <button type="button" class="secondary-btn" (click)="cancel()" [disabled]="loading" aria-label="Cancel">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
